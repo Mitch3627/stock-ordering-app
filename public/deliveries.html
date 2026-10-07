@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deliveries</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="deliveries" data-title="Deliveries" data-subtitle="Receive deliveries against the order and record shortages and use-by dates">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Receive a delivery</h2><p>Pick the delivery, load what was ordered, then correct anything that came short or extra.</p></div>
+      </div>
+      <div class="card-body stack">
+        <form class="form-grid" id="delivery-form">
+          <label class="field span-2"><span>Which delivery is this?</span><select id="slot-select"></select></label>
+          <label class="field" id="other-date-label" hidden><span>Date</span><input type="date" id="other-date"></label>
+          <label class="field"><span>Arrived on</span><input type="date" id="arrived-at"></label>
+          <label class="field"><span>Note (optional)</span><input type="text" id="delivery-note" placeholder="Driver, invoice number…"></label>
+          <div class="form-actions"><button type="button" id="load-expected" class="btn-secondary"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-download"/></svg>Load expected items</button></div>
+        </form>
+        <div id="expected-note" class="callout" hidden></div>
+        <form class="form-grid" id="line-form">
+          <label class="field span-2"><span>Add an item</span><span class="picker-wrap"><input type="text" id="item-input" placeholder="Type to search…"></span></label>
+          <label class="field"><span>Quantity</span>
+            <span class="qty-with-unit"><input type="number" id="qty" step="0.01" min="0" aria-label="Quantity"><select id="qty-unit" aria-label="Unit"></select></span>
+            <span class="conv" id="qty-conv"></span>
+          </label>
+          <label class="field"><span>Use by (optional)</span><input type="date" id="line-useby"></label>
+          <div class="form-actions"><button type="button" id="add-line" class="btn-secondary"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Add line</button></div>
+        </form>
+      </div>
+      <div class="table-wrap">
+        <table id="lines-table">
+          <thead><tr><th>Item</th><th class="num">Expected</th><th>Received (cases)</th><th>Use by</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <span class="muted" id="lines-summary">Add the same item twice to record two use-by dates. Use-by dates can also be added later.</span>
+        <button type="button" id="submit-delivery"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Save delivery</button>
+      </div>
+    </section>
+
+    <dialog id="useby-dialog" class="prompt-dialog">
+      <form method="dialog" id="useby-form">
+        <h2>Use-by dates</h2>
+        <p>Enter the use-by date on each of these, or leave it blank and add it later – the app will ask for it.</p>
+        <div id="useby-fields"></div>
+        <div class="row"><button type="button" class="btn-secondary" id="useby-cancel">Cancel</button><button type="submit" id="useby-save">Save delivery</button></div>
+      </form>
+    </dialog>
+
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Delivery history</h2><p>Open a delivery to see what was ordered and what came. Press Edit to correct one.</p></div>
+      </div>
+      <div class="table-wrap">
+        <table id="deliveries-table">
+          <thead><tr><th>Delivery</th><th>Arrived</th><th>Logged</th><th>Note</th><th>Items</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="card-footer" id="deliveries-more" hidden><span class="muted">Showing the last 60 days.</span><button type="button" class="btn-secondary btn-sm" id="deliveries-show-older">Show older</button></div>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="editmode.js"></script>
+  <script src="deliveries.js"></script>
+</body>
+</html>

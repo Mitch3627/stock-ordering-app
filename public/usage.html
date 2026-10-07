@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usage rates</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="usage" data-title="Usage rates" data-subtitle="How much each item really uses per £100 of sales, worked out from two counts">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Compare two counts</h2><p>Used = opening count + deliveries − closing count. Logged waste is taken out before the rate is worked out, because stock already loses it separately.</p></div>
+      </div>
+      <form class="card-body form-grid" id="usage-form">
+        <label class="field"><span>Opening count</span><select id="from-count"></select></label>
+        <label class="field"><span>Closing count</span><select id="to-count"></select></label>
+        <label class="field"><span>Category</span><select id="usage-category"><option value="">All categories</option></select></label>
+        <div class="form-actions"><button type="submit"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-chart"/></svg>Calculate</button></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Results</h2><div id="usage-summary" class="card-sub">Pick two counts and press Calculate.</div></div>
+      </div>
+      <div class="table-wrap">
+        <table id="usage-table">
+          <thead><tr><th>Item</th><th class="num">Opening</th><th class="num">Delivered</th><th class="num">Closing</th><th class="num">Used</th><th class="num">Wasted</th><th class="num">Used in sales</th><th class="num">Current / £100</th><th class="num">Suggested / £100</th><th></th></tr></thead>
+          <tbody><tr><td colspan="10" class="table-empty">Results appear here.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="usage.js"></script>
+</body>
+</html>

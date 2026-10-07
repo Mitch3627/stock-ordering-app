@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Use-by dates</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="batches" data-title="Use-by dates" data-subtitle="Dated stock, oldest first – it's used in this order">
+  <main id="page">
+    <section class="stats" id="useby-stats" aria-label="Use-by summary"></section>
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Dated stock</h2><p>Stock past its use-by stays until you log it as out-of-date waste. Press Edit to correct a date or quantity.</p></div>
+        <div class="card-actions"><button type="button" id="redate-open"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Add use-by date</button></div>
+      </div>
+      <div class="table-wrap">
+        <table id="batches-table">
+          <thead><tr><th>Item</th><th>Received</th><th>Use by</th><th>Time left</th><th class="num">Quantity</th><th>Status</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <dialog id="redate-dialog" class="prompt-dialog">
+      <form method="dialog" id="redate-form">
+        <h2>Add a use-by date</h2>
+        <p>Give some of an item's stock its own date – e.g. 2 cases of Beef Patty taken out to defrost now use by the 26th. It comes out of the batch you pick, the rest keep their date, and stock on hand doesn't change.</p>
+        <label>Item <select id="redate-item" required></select></label>
+        <label>Take from <select id="redate-batch" required></select></label>
+        <label>Quantity <span class="qty-with-unit"><input type="number" id="redate-qty" step="0.01" min="0" required aria-label="Quantity"><select id="redate-unit" aria-label="Unit"></select></span></label>
+        <div class="conv" id="redate-conv" style="text-align:right"></div>
+        <label>New use-by date <input type="date" id="redate-date" required></label>
+        <div class="row"><button type="button" class="btn-secondary" id="redate-cancel">Cancel</button><button type="submit" id="redate-save">Save</button></div>
+      </form>
+    </dialog>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="editmode.js"></script>
+  <script src="batches.js"></script>
+</body>
+</html>

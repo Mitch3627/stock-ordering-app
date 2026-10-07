@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order plan</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="orders" data-title="Order plan" data-subtitle="Suggested orders for every delivery – click a quantity to see how it was worked out">
+  <main id="page">
+    <div id="order-banner" class="banner manager-only" hidden></div>
+
+    <section class="card" id="plan-card">
+      <div class="card-header">
+        <div><h2>Deliveries</h2><p>Quantities in cases. Confirm an order once it's placed with the supplier – later deliveries are then planned on top of it. Amber figures are the supplier's own pack sizes.</p></div>
+        <div class="card-actions">
+          <button type="button" id="compare-toggle" class="btn-secondary" aria-pressed="false" title="Show what the plan would order next to a confirmed or edited order"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-list"/></svg>Compare with suggestion</button>
+          <div class="segmented" role="group" aria-label="How many deliveries to show">
+            <button type="button" data-view="next">Next delivery</button>
+            <button type="button" data-view="all">Next 4 weeks</button>
+          </div>
+        </div>
+      </div>
+      <div id="orders-bar"></div>
+      <div class="table-wrap plan-scroll"><table id="orders-table"></table></div>
+      <div class="card-footer" style="justify-content:flex-start"><div id="orders-moves" class="muted"></div></div>
+    </section>
+
+    <section class="card manager-only">
+      <div class="card-header">
+        <div><h2>Sales forecast</h2><p>Projected sales drive the plan. Enter the real figure after each day – it decides how much stock was used.</p></div>
+        <div class="card-actions"><button type="button" id="save-forecast"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Save forecast</button></div>
+      </div>
+      <div class="table-wrap">
+        <table id="forecast-table"><thead><tr><th>Day</th><th>Projected sales (£)</th><th>Real sales (£)</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <dialog id="explain-dialog" class="explain-dialog">
+      <div id="explain-body"></div>
+      <div class="row"><button type="button" id="explain-close" class="btn-secondary">Close</button></div>
+    </dialog>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="orders.js"></script>
+</body>
+</html>

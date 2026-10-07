@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="admin" data-title="Admin" data-subtitle="Stores, activity and backups">
+  <main id="page">
+    <section class="card not-admin"><div class="card-body">Only an admin can see this page.</div></section>
+
+    <section class="card admin-only">
+      <div class="card-header">
+        <div><h2>Stores</h2><p>Each store has its own stock, deliveries, counts, orders and settings. Switch store from the top of the sidebar; people only see the stores they work at (set on the Users page).</p></div>
+      </div>
+      <div class="table-wrap">
+        <table id="stores-table">
+          <thead><tr><th>Store</th><th class="num">People</th><th>Added</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card admin-only">
+      <div class="card-header">
+        <div><h2>Add a store</h2><p>Start it from another store to copy that store's items, case sizes, prices, usage rates, delivery days and targets. Nothing else is copied – do a full count there before its first order.</p></div>
+      </div>
+      <form class="card-body form-grid" id="add-store-form">
+        <label class="field"><span>Store name</span><input type="text" id="store-name-new" required autocomplete="off" placeholder="e.g. Eastgate"></label>
+        <label class="field"><span>Start from</span><select id="store-copy"></select></label>
+        <div class="form-actions"><button type="submit" id="add-store-btn"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Add store</button></div>
+      </form>
+    </section>
+
+    <section class="card admin-only">
+      <div class="card-header">
+        <div><h2>Activity</h2><p>Sign-ins, changes to people and stores, and what was logged in the store: deliveries, waste, counts, confirmed orders and stock corrections.</p></div>
+        <div class="row-actions">
+          <select id="activity-store" aria-label="Store"></select>
+          <select id="activity-days" aria-label="How far back"><option value="1">Today</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="activity-table" class="activity-table">
+          <thead><tr><th>When</th><th>Who</th><th>What</th><th>Details</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card admin-only">
+      <div class="card-header">
+        <div><h2>Sign-ins</h2><p>Ends every sign-in except yours – for example after a shared tablet goes missing. Everyone signs in again with their password. To sign out just one person, use the Users page.</p></div>
+      </div>
+      <div class="card-body"><button type="button" class="btn-danger" id="signout-all">Sign everyone else out</button></div>
+    </section>
+
+    <dialog id="rename-dialog" class="prompt-dialog">
+      <form method="dialog" id="rename-form">
+        <h2>Rename store</h2>
+        <label>Store name <input type="text" id="rename-name" required autocomplete="off"></label>
+        <div class="row"><button type="button" class="btn-secondary" id="rename-cancel">Cancel</button><button type="submit" id="rename-save">Save</button></div>
+      </form>
+    </dialog>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

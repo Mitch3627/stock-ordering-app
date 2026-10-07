@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock on hand</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="inventory" data-title="Stock on hand" data-subtitle="Live stock for every item – deliveries, sales and waste are already taken into account">
+  <main id="page">
+    <section class="stats" id="inventory-stats" aria-label="Stock summary"></section>
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Stock by item</h2><p>In the supplier's units, with cases alongside. Press Edit to correct a figure – it's recorded as a correction, not overwritten.</p></div>
+      </div>
+      <div class="toolbar">
+        <div class="search"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-search"/></svg><input type="text" id="item-search" placeholder="Search items…" aria-label="Search items"></div>
+        <div id="category-filters" class="filter-row"></div>
+      </div>
+      <table id="inventory-table">
+        <thead><tr><th>Item</th><th>Category</th><th class="num">On hand</th><th>Unit</th><th class="num">Cases</th><th>On its way</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="editmode.js"></script>
+  <script src="inventory.js"></script>
+</body>
+</html>

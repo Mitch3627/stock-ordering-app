@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Item master</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="items" data-title="Item master" data-subtitle="The settings behind every order – quantities are per case unless stated">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Items</h2><p>Press Edit to change values. "Items / case" is how many supplier units are in one case; "Supplier pack" is set where the supplier orders in a different pack.</p></div>
+        <div class="card-actions"><a class="btn btn-secondary btn-sm" id="export-csv" href="/api/items/export.csv"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-download"/></svg>Export CSV</a></div>
+      </div>
+      <div class="toolbar">
+        <div class="search"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-search"/></svg><input type="text" id="item-search" placeholder="Search items…" aria-label="Search items"></div>
+        <label class="check"><input type="checkbox" id="missing-price"> Missing a price</label>
+        <label class="check"><input type="checkbox" id="show-retired"> Show retired items</label>
+      </div>
+      <div class="toolbar" style="padding-top:10px;padding-bottom:10px"><div id="category-filters" class="filter-row"></div></div>
+      <div class="table-wrap">
+        <table id="items-table">
+          <thead>
+            <tr>
+              <th>Name</th><th>Category</th><th>Supplier unit</th><th class="num">Items / case</th><th class="num">Supplier pack</th>
+              <th class="num" title="Cases used per £100 of sales">Usage (cases / £100)</th><th class="num" title="Safety stock kept on top of what's needed, in cases">Buffer (cases)</th><th class="num" title="Most to hold in store, in cases">Max (cases)</th><th class="num" title="Orders are rounded up to multiples of this many cases">Case multiple</th><th class="num">Price (£ / case)</th><th title="Not dated · Date from the pack (typed in when it arrives; the app reminds you if it's missing) · Days after delivery (dated automatically)">Use-by dates</th><th>Active</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card manager-only">
+      <details id="add-item-box">
+        <summary class="card-header" style="border-bottom:0;list-style:none"><div><h2>Add an item</h2><p>For a new product or seasonal item. It's ordered and counted from the next plan.</p></div><span class="btn btn-secondary btn-sm"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Add item</span></summary>
+        <form class="card-body form-grid" id="add-item-form" style="border-top:1px solid var(--border)">
+          <label class="field span-2"><span>Name</span><input type="text" id="new-name" required></label>
+          <label class="field"><span>Category</span><input type="text" id="new-category" list="category-list" required></label>
+          <datalist id="category-list"></datalist>
+          <label class="field"><span>Supplier unit</span><input type="text" id="new-unit" placeholder="Each, KG…" required></label>
+          <label class="field"><span>Items per case</span><input type="number" id="new-ipou" min="0" step="any" value="1" required></label>
+          <label class="field"><span>Price per case (£)</span><input type="number" id="new-price" min="0" step="0.01"></label>
+          <label class="field"><span>Usage per £100</span><input type="number" id="new-usage" min="0" step="any" value="0"></label>
+          <label class="field"><span>Buffer (cases)</span><input type="number" id="new-buffer" min="0" step="any" value="0"></label>
+          <label class="field"><span>Max (cases)</span><input type="number" id="new-max" min="0" step="any"></label>
+          <div class="form-actions"><button type="submit" id="add-item-btn">Add item</button></div>
+        </form>
+      </details>
+    </section>
+
+    <section class="card manager-only">
+      <details>
+        <summary class="card-header" style="border-bottom:0;list-style:none"><div><h2>Import from CSV</h2><p>Paste CSV text with the same columns as the export to update or add items.</p></div><span class="btn btn-secondary btn-sm">Open</span></summary>
+        <div class="card-body stack" style="border-top:1px solid var(--border)">
+          <textarea id="import-csv" rows="8" aria-label="CSV to import"></textarea>
+          <div><button type="button" id="import-csv-btn" class="btn-secondary">Import CSV</button></div>
+        </div>
+      </details>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="editmode.js"></script>
+  <script src="items.js"></script>
+</body>
+</html>

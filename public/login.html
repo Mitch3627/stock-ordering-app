@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Stock &amp; Ordering</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body>
+  <div class="login-page">
+    <aside class="login-aside">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <span class="brand-text"><strong>Stock &amp; Ordering</strong><small>Restaurant stock tool</small></span>
+      </div>
+      <div class="login-pitch">
+        <h2>Every order, backed by the numbers.</h2>
+        <p>Live stock, use-by tracking and delivery-by-delivery order plans for your restaurant, built around a supplier ordering system.</p>
+        <ul class="login-points">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-cart"/></svg>Order plans that explain every quantity</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg>Use-by dates tracked from delivery to waste</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-count"/></svg>Counts and deliveries in the supplier's own units</li>
+        </ul>
+      </div>
+      <div class="login-foot">For restaurant teams. Ask your manager if you need an account.</div>
+    </aside>
+    <main class="login-main">
+      <div class="login-card">
+        <span class="login-store" id="login-store" hidden><svg class="icon icon-sm" aria-hidden="true"><use href="#i-store"/></svg><span></span></span>
+        <h1>Sign in</h1>
+        <p class="lead">Use your work email address and password.</p>
+        <form id="login-form" novalidate>
+          <label class="field"><span>Email</span><input type="email" id="email" autocomplete="username" required></label>
+          <label class="field"><span>Password</span><input type="password" id="password" autocomplete="current-password" required></label>
+          <div id="login-error" class="callout bad" role="alert" hidden></div>
+          <button type="submit" id="login-btn">Sign in</button>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="layout.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

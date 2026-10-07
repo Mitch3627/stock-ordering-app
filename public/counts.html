@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock count</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="counts" data-title="Stock count" data-subtitle="Count in the supplier's units – the same as the supplier's count sheet">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Count sheet</h2><p>Leave an item blank if you didn't count it. Figures save as you type and are shared, so two people can split the count.</p></div>
+        <div class="card-actions" id="count-progress-box" style="min-width:220px;flex-direction:column;align-items:stretch;gap:6px">
+          <span class="progress-text" id="count-progress"></span>
+          <div class="meter" style="margin-top:0"><span id="count-meter" style="width:0%"></span></div>
+          <span class="sync-note" id="count-sync" role="status"></span>
+        </div>
+      </div>
+      <div class="toolbar">
+        <label class="field" style="width:190px"><span>Count date</span><input type="date" id="counted-at"></label>
+        <div class="search" style="align-self:flex-end"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-search"/></svg><input type="search" id="count-search" placeholder="Search items…" aria-label="Search items"></div>
+      </div>
+      <div class="toolbar" style="padding-top:10px;padding-bottom:10px"><div id="count-filters" class="filter-row"></div></div>
+      <table id="count-table">
+        <thead><tr><th>Item</th><th>Counted</th><th>Supplier unit</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="card-footer">
+        <span class="muted">You'll see every difference, in supplier units and pounds, before anything is saved.</span>
+        <button type="button" id="preview-btn">Check the count<svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </section>
+
+    <section class="card" id="variance-section" hidden>
+      <div class="card-header">
+        <div><h2>Check before saving</h2><p>Biggest differences by value first. Saving sets stock to what you counted.</p></div>
+      </div>
+      <div class="card-body" id="count-warnings"></div>
+      <div class="table-wrap">
+        <table id="variance-table">
+          <thead><tr><th>Item</th><th class="num">You counted</th><th class="num">App expected</th><th class="num">Change</th><th class="num">Change (£)</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <div class="card-footer"><span class="crew-only muted">A manager saves the count once everything's been counted.</span><button type="button" id="commit-btn" class="manager-only"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Save count</button></div>
+    </section>
+
+    <section class="card" id="transfer-section" hidden>
+      <div class="card-header">
+        <div><h2>Count saved – copy it into your supplier system</h2><p>Same names and units as the supplier's count sheet.</p></div>
+        <div class="card-actions"><a class="btn btn-secondary btn-sm" id="download-csv" href="#"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-download"/></svg>Download CSV</a></div>
+      </div>
+      <div class="table-wrap">
+        <table id="transfer-table">
+          <thead><tr><th>Supplier name</th><th>Unit</th><th class="num">Counted</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="counts.js"></script>
+</body>
+</html>

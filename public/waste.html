@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Waste</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="waste" data-title="Waste" data-subtitle="Log waste as it happens – it comes off stock straight away">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Log waste</h2><p>Type the quantity in the supplier's unit (6 nuggets, not 6 cases) – the app converts it for you.</p></div>
+      </div>
+      <form class="card-body form-grid" id="waste-form">
+        <label class="field"><span>Date</span><input type="date" id="occurred-at" required></label>
+        <label class="field span-2"><span>Item</span><span class="picker-wrap"><input type="text" id="item-input" placeholder="Type to search…" required></span></label>
+        <label class="field"><span>Quantity</span>
+          <span class="qty-with-unit"><input type="number" id="qty" step="0.01" min="0" required aria-label="Quantity"><select id="qty-unit" aria-label="Unit"></select></span>
+          <span class="conv" id="qty-conv"></span>
+        </label>
+        <label class="field"><span>Shift</span><select id="shift"><option value="open">Opener</option><option value="close">Closer</option></select></label>
+        <label class="field"><span>Reason</span><input type="text" id="reason" list="reasons" placeholder="e.g. Dropped"></label>
+        <datalist id="reasons"><option value="Dropped"><option value="Out of date"><option value="Overcooked"><option value="Customer complaint"><option value="Damaged in delivery"></datalist>
+        <label class="check" style="height:36px"><input type="checkbox" id="ood"> Out of date</label>
+        <div class="form-actions"><button type="submit" id="log-waste"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Log waste</button></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Past use-by, still in stock</h2><p>Out-of-date stock stays in inventory until you log it as out-of-date waste.</p></div>
+      </div>
+      <div id="unclaimed"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Waste log</h2><p>Press Edit to correct or delete an entry – its stock goes back where it came from.</p></div>
+      </div>
+      <div class="table-wrap">
+        <table id="waste-table">
+          <thead><tr><th>Date</th><th>Item</th><th class="num">Quantity</th><th>Shift</th><th>Reason</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="card-footer" id="waste-more" hidden><span class="muted">Showing the last 60 days.</span><button type="button" class="btn-secondary btn-sm" id="waste-show-older">Show older</button></div>
+    </section>
+
+    <dialog id="edit-dialog" class="prompt-dialog">
+      <form method="dialog" id="edit-form">
+        <h2 id="edit-title">Correct waste</h2>
+        <label>Date <input type="date" id="edit-date" required></label>
+        <label>Quantity <span class="qty-with-unit"><input type="number" id="edit-qty" step="0.01" min="0" required aria-label="Quantity"><select id="edit-unit" aria-label="Unit"></select></span></label>
+        <label>Shift <select id="edit-shift"><option value="open">Opener</option><option value="close">Closer</option></select></label>
+        <label>Reason <input type="text" id="edit-reason" list="reasons"></label>
+        <label class="check"><input type="checkbox" id="edit-ood"> Out of date</label>
+        <div class="row"><button type="button" class="btn-secondary" id="edit-cancel">Cancel</button><button type="submit" id="edit-save">Save</button></div>
+      </form>
+    </dialog>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="editmode.js"></script>
+  <script src="waste.js"></script>
+</body>
+</html>

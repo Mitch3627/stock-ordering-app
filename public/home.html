@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="home" data-title="Dashboard" data-subtitle="Today at a glance">
+  <main id="page">
+    <section class="hero">
+      <div>
+        <h2 id="greeting">Welcome back</h2>
+        <p id="hero-sub">Loading today's figures…</p>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-secondary" href="deliveries.html"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-truck"/></svg>Receive a delivery</a>
+        <a class="btn" href="orders.html"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-cart"/></svg>Order plan</a>
+      </div>
+    </section>
+
+    <section class="grid grid-4" id="kpis" aria-label="Key figures"></section>
+
+    <section class="grid grid-main-side">
+      <div class="card">
+        <div class="card-header"><div><h2>Needs attention</h2><p>Everything that's due or out of line right now</p></div></div>
+        <ul class="attention-list" id="attention"></ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><div><h2>Running lowest</h2><p>How long stock lasts at forecast sales</p></div><a class="btn-link" href="inventory.html">Stock on hand</a></div>
+        <ul class="list" id="lowest"></ul>
+      </div>
+    </section>
+
+    <section class="grid grid-2">
+      <div class="card">
+        <div class="card-header"><div><h2>Use-by dates</h2><p>Next stock to go out of date</p></div><a class="btn-link" href="batches.html">All dates</a></div>
+        <ul class="list" id="useby-list"></ul>
+      </div>
+      <div class="card">
+        <div class="card-header"><div><h2>Records</h2><p>Counts and the item list behind every order</p></div></div>
+        <ul class="list" id="records-list"></ul>
+      </div>
+    </section>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>

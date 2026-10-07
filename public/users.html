@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Users</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="users" data-title="Users" data-subtitle="Who can sign in, where they work and what they can do">
+  <main id="page">
+    <section class="card crew-only"><div class="card-body">Only a manager or an admin can add people or change their access.</div></section>
+
+    <section class="card manager-only">
+      <div class="card-header">
+        <div><h2>People</h2><p><strong>Crew</strong> log deliveries and waste, fill in the count sheet and add use-by dates. <strong>Managers</strong> also confirm and change orders, enter sales, save counts, correct records, change the item master and settings, and look after the crew at their stores. <strong>Admins</strong> have every store and also manage managers, stores and backups.</p></div>
+      </div>
+      <div class="table-wrap">
+        <table id="users-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Access</th><th>Stores</th><th>Added</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card manager-only">
+      <div class="card-header">
+        <div><h2>Add someone</h2><p>Give them the email and the temporary password; they can change the password from the key icon once signed in.</p></div>
+      </div>
+      <form class="card-body form-grid" id="add-user-form">
+        <label class="field"><span>Name</span><input type="text" id="new-name" required autocomplete="off"></label>
+        <label class="field"><span>Email</span><input type="email" id="new-email" required autocomplete="off"></label>
+        <label class="field"><span>Temporary password</span><input type="password" id="new-password" minlength="8" required autocomplete="new-password"></label>
+        <label class="field"><span>Access</span><select id="new-role"><option value="crew">Crew</option><option value="manager" class="admin-only">Manager</option><option value="admin" class="admin-only">Admin</option></select></label>
+        <fieldset class="field store-picks admin-only" id="new-stores-field"><legend>Works at</legend><div id="new-stores" class="check-list"></div></fieldset>
+        <p class="muted not-admin" id="new-store-note"></p>
+        <div class="form-actions"><button type="submit" id="add-user-btn"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-plus"/></svg>Add</button></div>
+      </form>
+    </section>
+
+    <dialog id="password-reset" class="prompt-dialog">
+      <form method="dialog" id="reset-form">
+        <h2 id="reset-title">New password</h2>
+        <p>They're signed out on every device and sign in again with this.</p>
+        <label>Temporary password <input type="password" id="reset-password" minlength="8" required autocomplete="new-password"></label>
+        <div class="row"><button type="button" class="btn-secondary" id="reset-cancel">Cancel</button><button type="submit" id="reset-save">Set password</button></div>
+      </form>
+    </dialog>
+
+    <dialog id="stores-dialog" class="prompt-dialog">
+      <form method="dialog" id="stores-form">
+        <h2 id="stores-title">Stores</h2>
+        <p>They can open these stores and switch between them from the sidebar.</p>
+        <div id="stores-checks" class="check-list"></div>
+        <div class="row"><button type="button" class="btn-secondary" id="stores-cancel">Cancel</button><button type="submit" id="stores-save">Save</button></div>
+      </form>
+    </dialog>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="users.js"></script>
+</body>
+</html>

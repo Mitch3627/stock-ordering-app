@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings</title>
+  <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js"></script>
+</head>
+<body data-page="settings" data-title="Settings" data-subtitle="How this restaurant orders – delivery days, order days and the cost target">
+  <main id="page">
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Delivery and order days</h2><p>Tick the days deliveries arrive and choose the day each one is ordered. Each delivery is planned to last until the next one arrives.</p></div>
+      </div>
+      <div class="table-wrap">
+        <table id="schedule-table">
+          <thead><tr><th>Day</th><th>Delivery</th><th>Order placed on</th><th>Has to last</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">
+        <div><h2>Order plan</h2><p>What the plan aims for on each delivery, and the sales it assumes for days without a forecast.</p></div>
+      </div>
+      <div class="card-body form-grid">
+        <label class="field"><span>Target cost per delivery (£)</span><input type="number" id="target-cost" min="1" step="50" required><span class="conv">Orders are balanced towards this</span></label>
+        <label class="field"><span>Default daily sales (£)</span><input type="number" id="fallback-sales" min="1" step="100" required><span class="conv">Used for days with no sales forecast</span></label>
+      </div>
+      <div class="card-body" style="padding-top:0">
+        <div class="field-label">Categories that can be moved to another delivery to keep costs near the target</div>
+        <div class="filters" id="flex-cats" style="margin-top:8px"></div>
+      </div>
+    </section>
+
+    <div class="row" style="justify-content:flex-end">
+      <span class="muted crew-only">Only a manager can change these.</span>
+      <button type="button" id="save-settings" class="manager-only"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-check"/></svg>Save settings</button>
+    </div>
+  </main>
+  <script src="api.js"></script>
+  <script src="common.js"></script>
+  <script src="layout.js"></script>
+  <script src="session.js"></script>
+  <script src="prompts.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>
