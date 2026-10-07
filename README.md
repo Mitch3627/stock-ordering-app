@@ -8,6 +8,16 @@ I built it as a shift manager in a busy quick-service restaurant, where working 
 manager a long time and still left out-of-date waste. The aim: accurate orders in minutes, less waste, and real
 usage figures for every item.
 
+![Order plan: suggested cases for each item on the next delivery](docs/screenshots/order-plan.png)
+
+**Every number explains itself.** Click any planned quantity to see exactly how it was worked out:
+
+![How one order quantity was calculated](docs/screenshots/explain.png)
+
+**The dashboard** shows what needs doing today, the next delivery against its cost target, and what will run out first:
+
+![Dashboard](docs/screenshots/dashboard.png)
+
 **Stack:** Node.js 22, Express, SQLite (better-sqlite3), plain HTML/CSS/JavaScript front end, Node's built-in test
 runner (222 tests). Runs on one PC with no outside services, or on a server for several stores.
 
@@ -24,6 +34,11 @@ usage rates). It is not any real restaurant's data.
 - **Shared counts** – two people can split a stock count on different devices.
 - **Roles and stores** – crew, manager and admin access; any number of stores from one copy, each with its own
   database; activity log and daily backups.
+
+### How I built it
+AI-first, with Claude Code as the main build tool. Each feature started as a written design spec and step-by-step
+plan and was built against tests, and the whole app had a full code review before it was used for real orders. The test
+suite (`npm test`) covers the order maths, the stock log, counts, use-by dates, roles and multi-store access.
 
 - **How it works:** [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md) – the stock log, use-by dates, counts and the order plan.
 - **Hosting it for several stores:** [DEPLOYMENT.md](DEPLOYMENT.md).
